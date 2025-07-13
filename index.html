@@ -81,9 +81,9 @@
 <body>
 
   <div class="login-box">
-    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Patliputra_University.svg/1200px-Patliputra_University.svg.png">
+    <img src="PPU.png" alt="Patliputra University Logo">
     <h2>Patliputra University Login</h2>
-    <form onsubmit="redirectToDashboard(event)">
+    <form onsubmit="validateLogin(event)">
       <div class="input-group">
         <label for="email">Email ID</label>
         <input type="email" id="email" placeholder="Enter your email" required>
@@ -100,10 +100,17 @@
   </div>
 
   <script>
-    function redirectToDashboard(event) {
-      event.preventDefault(); // Prevent form refresh
-      // You can add validation logic here if needed
-      window.location.href = "https://mohitsaxena6363.github.io/mohit-collage63/";
+    function validateLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      // Dummy login check
+      if (email === "mohitoutlaw63@gmail.com" && password === "mohit@@") {
+        window.location.href = "https://mohitsaxena6363.github.io/mohit-collage63/";
+      } else {
+        alert("Invalid email or password!");
+      }
     }
   </script>
 
