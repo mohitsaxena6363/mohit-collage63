@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Patliputra University | Official Website</title>
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/en/f/f4/Patliputra_University.svg" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
   <style>
     :root {
       --bg: #f4f6f9;
@@ -17,9 +20,13 @@
     body.dark {
       --bg: #121212;
       --text: #f1f1f1;
-      --accent: #445ee2;
+      --accent: #2e3192;
       --light: #1f1f1f;
       --glass: rgba(18, 18, 18, 0.6);
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
@@ -46,6 +53,8 @@
     .logo {
       display: flex;
       align-items: center;
+      text-decoration: none;
+      color: white;
     }
 
     .logo img {
@@ -66,6 +75,32 @@
       border-radius: 6px;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .news-ticker {
+      overflow: hidden;
+      white-space: nowrap;
+      background: var(--accent);
+      color: white;
+      font-weight: bold;
+      padding: 10px;
+      position: relative;
+    }
+
+    .ticker-text {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 20s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .news-ticker:hover .ticker-text {
+      animation-play-state: paused;
     }
 
     .hero {
@@ -114,6 +149,13 @@
       transition: 0.3s;
       display: inline-block;
       margin: 6px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(46, 49, 146, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(46, 49, 146, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(46, 49, 146, 0); }
     }
 
     .btn:hover {
@@ -144,6 +186,42 @@
       transform: translateY(-5px);
     }
 
+    /* 📄 PDF Section */
+    #pdfs {
+      padding: 60px 20px;
+      background: var(--light);
+      text-align: center;
+    }
+
+    #pdfs h2 {
+      margin-bottom: 30px;
+    }
+
+    .pdf-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .pdf-list a {
+      background: var(--glass);
+      backdrop-filter: blur(6px);
+      padding: 12px 20px;
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .pdf-list a:hover {
+      background: var(--accent);
+      color: white;
+    }
+
     footer {
       background: var(--accent);
       color: white;
@@ -153,8 +231,12 @@
     }
 
     @media (max-width: 600px) {
-      .hero .content {
-        padding: 20px;
+      .hero h2 {
+        font-size: 20px;
+      }
+
+      .hero p {
+        font-size: 14px;
       }
 
       .logo h1 {
@@ -171,31 +253,37 @@
 <body>
 
   <header>
-    <div class="logo">
-      <img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Patliputra_University.svg/1200px-Patliputra_University.svg.png" />
+    <a class="logo" href="#">
+      <img src="https://upload.wikimedia.org/wikipedia/en/f/f4/Patliputra_University.svg" />
       <h1>पाटलिपुत्र विश्वविद्यालय<br />Patliputra University</h1>
-    </div>
-    <button class="toggle-btn" onclick="toggleDark()">🌙 Mode</button>
+    </a>
+    <button class="toggle-btn" onclick="toggleDark(this)">🌙 Dark Mode</button>
   </header>
+
+  <div class="news-ticker">
+    <div class="ticker-text" id="greetingText">
+      👋🏻 Welcome Patliputra University Mohit Saxena ❤️
+    </div>
+  </div>
 
   <section class="hero">
     <div class="content">
       <h2>Welcome to Patliputra University</h2>
       <p>One of Bihar's leading universities, offering academic excellence and holistic development.</p>
       <a href="#courses" class="btn">Browse Courses</a>
-      <a href="https://ppup.ac.in/details.php?id=56399" class="btn" target="_blank">🔔 collage Notification - 24-28 </a>
+      <a href="https://ppup.ac.in/details.php?id=56399" class="btn" target="_blank">🔔 College Notification - 24-28</a>
     </div>
   </section>
 
   <section id="about">
-    <h2>Hello" Mohit ❤️</h2>
+    <h2>Hello "Mohit ❤️"</h2>
     <p style="max-width: 700px; margin: auto;">
       Established in 2018, Patliputra University serves as a center of higher education in Bihar. With a strong academic curriculum, experienced faculty, and modern infrastructure, we strive to empower students for the future.
     </p>
   </section>
 
-  <section id="courses">
-    <h2>Our Programs</h2>
+  <section id="courses" aria-labelledby="coursesHeading">
+    <h2 id="coursesHeading">Our Programs</h2>
     <div class="courses">
       <div class="course">
         <h3>Bachelor of Science</h3>
@@ -216,19 +304,56 @@
     </div>
   </section>
 
+  <!-- 📄 PDF DOWNLOAD SECTION -->
+  <section id="pdfs">
+    <h2>📄 Important PDF Downloads</h2>
+    <div class="pdf-list">
+      <a href="https://drive.google.com/file/d/1C7C4KuWKHIMTgZVLTatUl6xS2MBEPTAa/view?usp=drive_link" target="_blank">
+        <i class="fa-solid fa-file-pdf"></i> Mohit ANS Admission Pdf 2024 (PDF)
+      </a>
+      <a href="https://ppup.ac.in/files/exam-schedule.pdf" target="_blank">
+        <i class="fa-solid fa-calendar-days"></i> Exam Schedule July 2025
+      </a>
+      <a href="https://ppup.ac.in/files/syllabus.pdf" target="_blank">
+        <i class="fa-solid fa-book-open"></i> Syllabus BA/BSc/BCom 2025
+      </a>
+    </div>
+  </section>
+
   <section>
     <h2>Contact Us</h2>
     <p>📍 Patna, Bihar - 800020<br>📞 +91-612-2350132<br>📧 info@ppup.ac.in</p>
   </section>
 
-  <footer>
-    © 2026 Patliputra University, Bihar | Developed by Mohit Saxena
+  <footer id="footer">
+    © 2026 Patliputra University, Bihar | Developed by Mohit Saxena<br>
+    <span id="updatedTime"></span>
   </footer>
 
   <script>
-    function toggleDark() {
+    function toggleDark(btn) {
       document.body.classList.toggle("dark");
+      btn.textContent = document.body.classList.contains("dark") ? "☀️ Light Mode" : "🌙 Dark Mode";
     }
+
+    const greetingEl = document.getElementById("greetingText");
+    const now = new Date();
+    const hours = now.getHours();
+    let greet = "";
+
+    if (hours >= 5 && hours < 12) {
+      greet = "🌅 Good Morning";
+    } else if (hours >= 12 && hours < 17) {
+      greet = "🌞 Good Afternoon";
+    } else if (hours >= 17 && hours < 20) {
+      greet = "🌇 Good Evening";
+    } else {
+      greet = "🌙 Good Night";
+    }
+
+    greetingEl.textContent = `${greet}, Mohit Saxena ❤️ | ${now.toLocaleString()}`;
+
+    document.getElementById("updatedTime").innerText = "🕒 Last updated: " + now.toLocaleString();
   </script>
 
 </body>
